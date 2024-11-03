@@ -12,7 +12,7 @@ int main() {
       if (event.type == sf::Event::Closed)
         window.close();
     }
-
+    // dsafdsfsfs
     window.clear(sf::Color::Black);
     window.display();
   }
