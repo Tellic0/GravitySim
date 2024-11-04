@@ -1,21 +1,9 @@
-#include "SFML/Graphics.hpp"
+#include "engine.h"
 
 int main() {
-  sf::RenderWindow window = sf::RenderWindow(sf::VideoMode(800, 800), "SFML");
+  Window window;
 
-  while (window.isOpen()) {
-
-    sf::Event event;
-
-    while (window.pollEvent(event)) {
-
-      if (event.type == sf::Event::Closed)
-        window.close();
-    }
-    // dsafdsfsfs
-    window.clear(sf::Color::Black);
-    window.display();
+  while (window.getWindow()->isOpen()) {
+    window.render();
   }
-
-  return 0;
 }

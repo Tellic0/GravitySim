@@ -12,5 +12,10 @@ FetchContent_Declare(SFML
         SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(GravitySim src/main.cpp)
+add_executable(GravitySim src/main.cpp
+                          src/engine.h
+                          src/engine.cpp
+                          src/window.h
+                          src/window.cpp
+)
 target_link_libraries(GravitySim PRIVATE sfml-graphics sfml-window sfml-audio sfml-system)
