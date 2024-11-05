@@ -1,9 +1,10 @@
 #include "engine.h"
 
 int main() {
-  Window window;
+    Window window;
 
-  while (window.getWindow()->isOpen()) {
-    window.render();
-  }
+    while (window.getWindow()->isOpen()) {
+        window.render();
+        window.pollEvents();
+    }
 }

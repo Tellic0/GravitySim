@@ -8,6 +8,6 @@
 #include "window.h"
 
 class Engine {
-public:
-  Engine();
+  public:
+    Engine();
 };

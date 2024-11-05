@@ -3,17 +3,20 @@
 #include "SFML/Graphics.hpp"
 
 class Window {
-private:
-  sf::RenderWindow *window;
-  sf::VideoMode videoMode;
+  public:
+    Window();
+    ~Window();
 
-  void initWindow();
+    void render();
 
-public:
-  Window();
-  ~Window();
+    void pollEvents();
 
-  void render();
+    sf::RenderWindow *getWindow();
 
-  sf::RenderWindow *getWindow();
+  private:
+    sf::Event event;
+    sf::RenderWindow *window;
+    sf::VideoMode videoMode;
+
+    void initWindow();
 };
