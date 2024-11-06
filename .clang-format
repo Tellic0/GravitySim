@@ -1,4 +1,4 @@
 BasedOnStyle: LLVM
-IndentWidth: 4  #Set this to your preferred indentation size
-TabWidth: 4 #Set this to the same value as IndentWidth,
+IndentWidth: 2  #Set this to your preferred indentation size
+TabWidth: 2 #Set this to the same value as IndentWidth,
 UseTab: Never
