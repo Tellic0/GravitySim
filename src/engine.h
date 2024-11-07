@@ -22,6 +22,7 @@ public:
   void run();
 
 private:
-  Window window;
+  // Pointer to a Window class (singleton)
+  Window *window;
   sf::RectangleShape TEST;
 };

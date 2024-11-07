@@ -1,15 +1,20 @@
 #include "objectmanager.h"
 
-unsigned int ObjectManager::getObjectCount() { return objectCount; }
+ObjectManager *ObjectManager::instancePtr;
+std::mutex ObjectManager::mtx;
 
-Object *ObjectManager::getObjectById(unsigned int id) {
-  for (auto i : gameContainer) {
-    if (i.first == id) {
-      return i.second;
+unsigned long long int ObjectManager::getObjectCount() { return objectCount; }
+
+Object *ObjectManager::getObjectById(unsigned int id) {}
+
+ObjectManager *ObjectManager::getInstance() {
+  if (instancePtr == nullptr) {
+    std::lock_guard<std::mutex> lock(mtx);
+    if (instancePtr == nullptr) {
+      instancePtr = new ObjectManager();
     }
   }
-  std::cout << "No object found in game container" << std::endl;
-  return 0;
+  return instancePtr;
 }
 
 void ObjectManager::incrementObjectCount() { objectCount++; }

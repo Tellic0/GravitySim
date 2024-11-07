@@ -1,13 +1,14 @@
 #include "window.h"
 
+Window *Window::instancePtr = nullptr;
+std::mutex Window::mtx;
+
 void Window::initWindow() {
   this->videoMode = sf::VideoMode(800, 800);
   this->window = new sf::RenderWindow(this->videoMode, "GravitySim");
 }
 
-Window::Window() { this->initWindow(); }
-
-Window::~Window() {}
+Window::Window() : window(nullptr) { initWindow(); }
 
 void Window::pollEvents() {
   while (this->window->pollEvent(this->event)) {
@@ -24,6 +25,16 @@ void Window::pollEvents() {
   }
 }
 
-bool Window::isRunning() { return this->window->isOpen(); }
+Window *Window::getInstance() {
+  if (instancePtr == nullptr) {
+    std::lock_guard<std::mutex> lock(mtx);
+    if (instancePtr == nullptr) {
+      instancePtr = new Window();
+    }
+  }
+  return instancePtr;
+}
 
 sf::RenderWindow *Window::getWindow() { return this->window; }
+
+bool Window::isRunning() { return window->isOpen(); }

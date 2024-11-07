@@ -4,17 +4,16 @@
 
 #include <iostream>
 #include <iterator>
+#include <mutex>
 #include <unordered_map>
 
 // Class for managing objects (id and map)
 class ObjectManager {
 public:
-  // Constructor
-  ObjectManager();
-
   // Getters
-  static unsigned int getObjectCount();
+  unsigned long long int getObjectCount();
   Object *getObjectById(unsigned int id);
+  static ObjectManager *getInstance();
 
   // Add a new object to the container
   void addObjectToContainer(Object *);
@@ -26,9 +25,15 @@ public:
   void incrementObjectCount();
 
 private:
+  ObjectManager() = default;
+
+  static ObjectManager *instancePtr;
+
+  static std::mutex mtx;
+
   // Unordered_map that holds all of the game objects
-  static std::unordered_map<unsigned int, Object *> gameContainer;
+  std::unordered_map<unsigned int, Object *> gameContainer;
 
   // Object count
-  static unsigned int objectCount;
+  unsigned long long int objectCount;
 };
