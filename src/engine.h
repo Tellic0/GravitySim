@@ -16,6 +16,8 @@
 #include "globals.h"
 #include "objectmanager.h"
 #include "object.h"
+#include "drawable.h"
+#include "moveable.h"
 
 class Engine {
 private:
@@ -46,6 +48,9 @@ public:
     void update();
     void render();
     void run();
+
+    // Temporary test methods
+    void test_game_container();
 };
 
 #endif//GRAVITYSIM_SRC_ENGINE_H

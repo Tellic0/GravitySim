@@ -24,6 +24,8 @@ add_executable(GravitySim src/main.cpp
         src/objectmanager.cpp
         src/objectmanager.h
         src/object.cpp
-        src/object.h)
+        src/object.h
+        src/moveable.h
+        src/drawable.h)
 
 target_link_libraries(GravitySim PRIVATE sfml-graphics sfml-window sfml-audio sfml-system)

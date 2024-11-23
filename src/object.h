@@ -26,6 +26,7 @@ public:
     // Variables
     sf::Vector2f position;
     sf::Vector2f size;
+    // TODO: add orientation
 
 };
 

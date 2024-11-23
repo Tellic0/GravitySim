@@ -7,8 +7,16 @@ Object_Manager *Object_Manager::instance_ptr = nullptr;
 std::mutex Object_Manager::mtx;
 
 Object_Manager::Object_Manager() {
-    object_count = 0;
+    object_count = 1;
 }
+
+Object_Manager::~Object_Manager() {
+    for (auto &pair : game_container) {
+        delete pair.second; // Clean up each dynamically allocated Object
+    }
+    game_container.clear();
+}
+
 
 Object_Manager *Object_Manager::get_instance() {
     if (instance_ptr == nullptr) {
@@ -20,9 +28,12 @@ Object_Manager *Object_Manager::get_instance() {
     return instance_ptr;
 }
 
-unsigned long long int Object_Manager::get_object_count() {
-    std::cout << object_count << std::endl;
+unsigned long long int Object_Manager::get_current_id() {
     return object_count;
+}
+
+unsigned long long int Object_Manager::get_object_count() {
+    return game_container.size();
 }
 
 Object *Object_Manager::get_object_by_id(unsigned long long id) {

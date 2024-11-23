@@ -19,7 +19,7 @@ private:
     unsigned long long int object_count;
 
     Object_Manager();
-    ~Object_Manager() = default;
+    ~Object_Manager();
 
     static Object_Manager *instance_ptr;
 
@@ -30,6 +30,7 @@ public:
     Object_Manager &operator=(const Object_Manager&) = delete;
 
     // Getters
+    unsigned long long int get_current_id();
     unsigned long long int get_object_count();
     Object *get_object_by_id(unsigned long long int id);
     static Object_Manager *get_instance();
