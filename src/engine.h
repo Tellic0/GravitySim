@@ -7,17 +7,21 @@
 
 #include <iostream>
 #include <mutex>
+#include <chrono>
+#include <thread>
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
 
 #include "window.h"
+#include "globals.h"
+#include "objectmanager.h"
+#include "object.h"
 
 class Engine {
 private:
     // Private constructors and destructors
     Engine();
-    ~Engine();
+    ~Engine() = default;
 
     // Thread safety
     static std::mutex mtx;
@@ -30,12 +34,14 @@ public:
     Engine &operator=(const Engine &) = delete;
 
     Window *window_class;
+    Object_Manager *object_manager_class;
+
     sf::RenderWindow *window;
 
     static Engine *get_instance();
 
     // Initialization
-    void init_window();
+    void init_classes();
 
     void update();
     void render();

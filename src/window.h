@@ -18,7 +18,7 @@ private:
     void init_window();
 
     Window();
-    ~Window();
+    ~Window() = default;
 
     static Window *instance_ptr;
     static std::mutex mtx;
@@ -34,8 +34,6 @@ public:
     static Window *get_instance();
 
     sf::RenderWindow *get_window();
-
-    bool is_open();
 };
 
 #endif//GRAVITYSIM_SRC_WINDOW_H

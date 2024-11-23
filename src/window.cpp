@@ -11,11 +11,10 @@ std::mutex Window::mtx;
 
 void Window::init_window() {
     video_mode = sf::VideoMode(1920, 1080);
-    sf::RenderWindow window(video_mode, "GravitySim");
+    window.create(video_mode, "GravitySim");
 }
 
 Window::Window() { init_window(); }
-Window::~Window() {}
 
 void Window::poll_events() {
     while (window.pollEvent(event)) {
@@ -35,7 +34,7 @@ void Window::poll_events() {
 Window *Window::get_instance() {
     if (instance_ptr == nullptr) {
         std::lock_guard<std::mutex> lock(mtx);
-        if (instance_ptr = nullptr) {
+        if (instance_ptr == nullptr) {
             instance_ptr = new Window();
         }
     }
@@ -43,7 +42,3 @@ Window *Window::get_instance() {
 }
 
 sf::RenderWindow *Window::get_window() { return &window; }
-
-bool Window::is_open() { return window.isOpen(); }
-
-

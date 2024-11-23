@@ -7,15 +7,14 @@
 Engine *Engine::instance_ptr = nullptr;
 std::mutex Engine::mtx;
 
-void Engine::init_window() {
+void Engine::init_classes() {
     window_class = Window::get_instance();
     window = window_class->get_window();
-    if (window == nullptr) {
-        std::cout << "nptr" << std::endl;
-    }
+    object_manager_class = Object_Manager::get_instance();
+
 }
 
-Engine::Engine() { init_window(); }
+Engine::Engine() { init_classes(); }
 
 Engine *Engine::get_instance() {
     if (instance_ptr == nullptr) {
@@ -27,13 +26,39 @@ Engine *Engine::get_instance() {
     return instance_ptr;
 }
 
-void Engine::update() {}
+void Engine::update() {
+    const std::chrono::microseconds frame_duration(1000000 / FRAMERATE);
+    while (window->isOpen()) {
+        auto frame_start = std::chrono::steady_clock::now();
 
-void Engine::render() { window->clear(sf::Color::Black); }
+        // Game updates
+        window_class->poll_events();
+        object_manager_class->get_object_count();
+        object_manager_class->increment_object_count();
+
+        // Checking if the frame took longer than expected to update
+        auto frame_end = std::chrono::steady_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(frame_end - frame_start);
+        if ( elapsed < frame_duration ) {
+            std::this_thread::sleep_for(frame_duration - elapsed);
+            break;
+        }
+        else {
+            std::cout << "Frame took longer than expected!" << std::endl;
+            break;
+        }
+    }
+}
+
+void Engine::render() {
+    window->clear(sf::Color::Black);
+    window->display();
+}
 
 void Engine::run() {
-    while (window_class->is_open()) {
+    while (window->isOpen()) {
         update();
         render();
+        window_class->poll_events();
     }
 }
