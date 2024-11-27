@@ -28,6 +28,10 @@ Object_Manager *Object_Manager::get_instance() {
     return instance_ptr;
 }
 
+std::unordered_map<unsigned long long int, Object *> *Object_Manager::get_game_container() {
+    return &game_container;
+}
+
 unsigned long long int Object_Manager::get_current_id() {
     return object_count;
 }
@@ -36,9 +40,9 @@ unsigned long long int Object_Manager::get_object_count() {
     return game_container.size();
 }
 
-Object *Object_Manager::get_object_by_id(unsigned long long id) {
+Object *Object_Manager::get_object_by_id(unsigned long long object_id) {
     try {
-        return game_container.at(id);
+        return game_container.at(object_id);
     } catch (std::out_of_range) {
         std::cout << "Could not find the object : out_of_range" << std::endl;
         return nullptr;

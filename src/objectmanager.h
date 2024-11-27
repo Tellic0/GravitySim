@@ -14,7 +14,7 @@
 class Object_Manager {
 private:
     // Unordered map that holds all the objects in the game
-    std::unordered_map<unsigned int, Object *> game_container;
+    std::unordered_map<unsigned long long int, Object *> game_container;
 
     unsigned long long int object_count;
 
@@ -32,8 +32,10 @@ public:
     // Getters
     unsigned long long int get_current_id();
     unsigned long long int get_object_count();
-    Object *get_object_by_id(unsigned long long int id);
+    Object *get_object_by_id(unsigned long long int object_id);
     static Object_Manager *get_instance();
+    // Temp
+    std::unordered_map<unsigned long long int, Object *> *get_game_container();
 
     // Add object to the container
     void add_object(Object *object);

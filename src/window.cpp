@@ -6,12 +6,15 @@
 
 #include "window.h"
 
+#include "globals.h"
+
 Window *Window::instance_ptr = nullptr;
 std::mutex Window::mtx;
 
 void Window::init_window() {
     video_mode = sf::VideoMode(1920, 1080);
     window.create(video_mode, "GravitySim");
+    window.setFramerateLimit(FRAMERATE);
 }
 
 Window::Window() { init_window(); }

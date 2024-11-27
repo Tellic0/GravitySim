@@ -9,8 +9,6 @@
 
 class Moveable {
 public:
-    virtual ~Moveable();
-
     virtual void move_object() = 0;
 
     bool is_moveable = true;

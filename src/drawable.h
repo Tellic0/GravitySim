@@ -9,8 +9,6 @@
 
 class Drawable {
 public:
-    virtual ~Drawable() = default;
-
     virtual void draw_object(sf::RenderWindow *window) = 0;
 
     bool is_drawable = true;
