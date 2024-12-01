@@ -27,11 +27,11 @@ Engine *Engine::get_instance() {
     }
     return instance_ptr;
 }
+
+
 // TEMPORARY
 void Engine::test_game_container() {
-    std::cout << object_manager_class->get_object_count() << std::endl;
 }
-
 
 void Engine::update() {
     const std::chrono::microseconds frame_duration(1000000 / FRAMERATE);
@@ -40,7 +40,6 @@ void Engine::update() {
 
         // Game updates TEMP
         test_game_container();
-
 
         // Checking if the frame took longer than expected to update
         auto frame_end = std::chrono::steady_clock::now();
@@ -59,11 +58,11 @@ void Engine::update() {
 void Engine::render() {
     window->clear(sf::Color::Black);
 
-    std::unordered_map<unsigned long long int, Object*> *game_container = object_manager_class->get_game_container();
+    std::unordered_map<unsigned long long int, Object *> *game_container = object_manager_class->get_game_container();
 
-    for (const auto& [id, obj] : *game_container) {
+    for (const auto &[id, obj] : *game_container) {
         if (obj) {
-            if (Drawable* derived_object = dynamic_cast<Drawable*>(obj); derived_object->is_drawable) {
+            if (Drawable *derived_object = dynamic_cast<Drawable *>(obj); derived_object->is_drawable) {
                 derived_object->draw_object(window);
             }
         }

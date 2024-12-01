@@ -40,7 +40,7 @@ unsigned long long int Object_Manager::get_object_count() {
     return game_container.size();
 }
 
-Object *Object_Manager::get_object_by_id(unsigned long long object_id) {
+Object *Object_Manager::get_objects_by_id(unsigned long long object_id) {
     try {
         return game_container.at(object_id);
     } catch (std::out_of_range) {
@@ -55,7 +55,7 @@ void Object_Manager::add_object(Object *object) {
 }
 
 void Object_Manager::delete_object(unsigned long long id) {
-    Object *object = get_object_by_id(id);
+    Object *object = get_objects_by_id(id);
     if (object != nullptr) {
         game_container.erase(id);
     }

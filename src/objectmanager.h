@@ -8,13 +8,18 @@
 #include <unordered_map>
 #include <mutex>
 #include <iostream>
+#include <typeindex>
+#include <boost/ptr_container/ptr_unordered_map.hpp>
+
 #include "object.h"
 
 // A class that holds and manages the game_container an unordered_map of all the object in the game
 class Object_Manager {
 private:
     // Unordered map that holds all the objects in the game
-    std::unordered_map<unsigned long long int, Object *> game_container;
+    std::unordered_map<unsigned long long int, Object*> game_container;
+
+    //boost::unordered_map<unsigned long long int, Object*> game_container;
 
     unsigned long long int object_count;
 
@@ -32,8 +37,9 @@ public:
     // Getters
     unsigned long long int get_current_id();
     unsigned long long int get_object_count();
-    Object *get_object_by_id(unsigned long long int object_id);
+    Object *get_objects_by_id(unsigned long long int object_id);
     static Object_Manager *get_instance();
+
     // Temp
     std::unordered_map<unsigned long long int, Object *> *get_game_container();
 
@@ -45,6 +51,9 @@ public:
 
     // Increments object_count count by 1
     void increment_object_count();
+
+    // Synchronizes the game_container and game_container by categories
+    void update();
 
 };
 

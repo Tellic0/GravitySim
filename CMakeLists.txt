@@ -13,7 +13,7 @@ include(FetchContent)
 #)
 #FetchContent_MakeAvailable(SFML)
 
-find_package(SFML COMPONENTS graphics window system REQUIRED)
+find_package(SFML COMPONENTS graphics window system audio REQUIRED)
 
 add_executable(GravitySim src/main.cpp
         src/engine.cpp

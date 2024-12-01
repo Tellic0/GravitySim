@@ -7,10 +7,13 @@
 #include "drawable.h"
 #include "moveable.h"
 #include "object.h"
+#include "objectmanager.h"
 
 
 class Test : public Object, public Drawable, public Moveable {
 public:
+    Object_Manager *object_manager_class;
+
     Test();
     ~Test();
 

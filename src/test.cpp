@@ -5,6 +5,7 @@
 #include "test.h"
 
 Test::Test() {
+    object_manager_class = Object_Manager::get_instance();
     rect.setSize(sf::Vector2f(200, 200));
     rect.setPosition(sf::Vector2f(0, 0));
     rect.setFillColor(sf::Color::Blue);
