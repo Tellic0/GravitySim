@@ -27,7 +27,6 @@ public:
     sf::Vector2f position;
     sf::Vector2f size;
     // TODO: add orientation
-
 };
 
 #endif//GRAVITYSIM_SRC_OBJECT_H

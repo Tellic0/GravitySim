@@ -14,4 +14,3 @@ Object::Object() {
 Object::~Object() {
     object_manager->delete_object(id);
 }
-

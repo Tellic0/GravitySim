@@ -28,7 +28,6 @@ Engine *Engine::get_instance() {
     return instance_ptr;
 }
 
-
 // TEMPORARY
 void Engine::test_game_container() {
 }
@@ -40,6 +39,11 @@ void Engine::update() {
 
         // Game updates TEMP
         test_game_container();
+        for (const auto &[id, obj] : *object_manager_class->get_game_container()) {
+            if (obj) {
+                obj->update_object();
+            }
+        }
 
         // Checking if the frame took longer than expected to update
         auto frame_end = std::chrono::steady_clock::now();
