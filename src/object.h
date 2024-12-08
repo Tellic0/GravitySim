@@ -15,10 +15,13 @@ private:
 
 public:
     virtual void update_object() = 0;
+    virtual void draw_object(sf::RenderWindow *window) = 0;
 
     // Constructor and destructor
     Object();
-    ~Object();
+    virtual ~Object();
+
+    virtual const std::type_info &get_type();
 
     // Id in the game container
     unsigned long long int id;
@@ -26,6 +29,7 @@ public:
     // Variables
     sf::Vector2f position;
     sf::Vector2f size;
+    bool should_be_drawn = true;
     // TODO: add orientation
 };
 

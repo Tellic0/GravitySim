@@ -3,6 +3,7 @@
 //
 
 #include "engine.h"
+#include <vector>
 
 Engine *Engine::instance_ptr = nullptr;
 std::mutex Engine::mtx;
@@ -38,13 +39,17 @@ void Engine::update() {
         auto frame_start = std::chrono::steady_clock::now();
 
         // Game updates TEMP
+        std::vector<unsigned long long int> to_delete;
         test_game_container();
         for (const auto &[id, obj] : *object_manager_class->get_game_container()) {
             if (obj) {
                 obj->update_object();
+                to_delete.push_back(obj->id);
             }
         }
-
+        for (auto e : to_delete) {
+            delete object_manager_class->get_objects_by_id(e);
+        }
         // Checking if the frame took longer than expected to update
         auto frame_end = std::chrono::steady_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(frame_end - frame_start);
@@ -63,12 +68,11 @@ void Engine::render() {
     window->clear(sf::Color::Black);
 
     std::unordered_map<unsigned long long int, Object *> *game_container = object_manager_class->get_game_container();
-
-    for (const auto &[id, obj] : *game_container) {
-        if (obj) {
-            if (Drawable *derived_object = dynamic_cast<Drawable *>(obj); derived_object->is_drawable) {
-                derived_object->draw_object(window);
-            }
+    //const auto &[id, obj] : *game_container
+    for (std::unordered_map<unsigned long long int, Object *>::iterator obj = game_container->begin();
+         obj != game_container->end(); ++obj) {
+        if (obj->second->should_be_drawn) {
+            obj->second->draw_object(window);
         }
     }
 

@@ -4,13 +4,11 @@
 
 #ifndef TEST_H
 #define TEST_H
-#include "drawable.h"
 #include "moveable.h"
 #include "object.h"
 #include "objectmanager.h"
 
-
-class Test : public Object, public Drawable, public Moveable {
+class Test : public Object, public Moveable {
 public:
     Object_Manager *object_manager_class;
 
@@ -26,9 +24,6 @@ public:
     sf::RectangleShape rect;
 
     bool is_test;
-
 };
 
-
-
-#endif //TEST_H
+#endif//TEST_H

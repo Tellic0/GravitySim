@@ -11,7 +11,7 @@ class Moveable {
 public:
     virtual void move_object() = 0;
 
-    float gravity = 0;
+    float gravity = 5;
 
     float get_gravity() { return gravity; }
 

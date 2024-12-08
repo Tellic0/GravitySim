@@ -14,3 +14,7 @@ Object::Object() {
 Object::~Object() {
     object_manager->delete_object(id);
 }
+
+const std::type_info &Object::get_type() {
+    return typeid(*this);
+}

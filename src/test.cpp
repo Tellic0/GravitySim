@@ -14,6 +14,7 @@ Test::Test() {
 }
 
 Test::~Test() {
+    object_manager_class->delete_object(id);
 }
 
 void Test::draw_object(sf::RenderWindow *window) {
@@ -21,11 +22,10 @@ void Test::draw_object(sf::RenderWindow *window) {
 }
 
 void Test::move_object() {
-    sf::Vector2f pos = rect.getPosition();
-    pos += movement_vector;
-    pos.y += gravity;
-    rect.setPosition(pos);
+    rect.move(movement_vector);
+    rect.move(0, gravity);
 }
+
 void Test::update_object() {
     move_object();
 }

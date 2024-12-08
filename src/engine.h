@@ -5,20 +5,19 @@
 #ifndef GRAVITYSIM_SRC_ENGINE_H
 #define GRAVITYSIM_SRC_ENGINE_H
 
+#include <chrono>
 #include <iostream>
 #include <mutex>
-#include <chrono>
 #include <thread>
 
 #include <SFML/Graphics.hpp>
 
-#include "window.h"
 #include "globals.h"
-#include "objectmanager.h"
-#include "object.h"
-#include "drawable.h"
 #include "moveable.h"
+#include "object.h"
+#include "objectmanager.h"
 #include "test.h"
+#include "window.h"
 
 class Engine {
 private:

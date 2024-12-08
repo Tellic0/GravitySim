@@ -12,11 +12,10 @@ Object_Manager::Object_Manager() {
 
 Object_Manager::~Object_Manager() {
     for (auto &pair : game_container) {
-        delete pair.second; // Clean up each dynamically allocated Object
+        delete pair.second;// Clean up each dynamically allocated Object
     }
     game_container.clear();
 }
-
 
 Object_Manager *Object_Manager::get_instance() {
     if (instance_ptr == nullptr) {
@@ -42,7 +41,7 @@ unsigned long long int Object_Manager::get_object_count() {
 
 Object *Object_Manager::get_objects_by_id(unsigned long long object_id) {
     try {
-        return game_container.at(object_id);
+        return game_container[object_id];
     } catch (std::out_of_range) {
         std::cout << "Could not find the object : out_of_range" << std::endl;
         return nullptr;
@@ -55,10 +54,7 @@ void Object_Manager::add_object(Object *object) {
 }
 
 void Object_Manager::delete_object(unsigned long long id) {
-    Object *object = get_objects_by_id(id);
-    if (object != nullptr) {
-        game_container.erase(id);
-    }
+    game_container.erase(id);
 }
 
 void Object_Manager::increment_object_count() { object_count++; }
