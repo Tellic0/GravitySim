@@ -53,8 +53,18 @@ void Object_Manager::add_object(Object *object) {
     increment_object_count();
 }
 
+template<typename T>
+void Object_Manager::add_by_categories(T, unsigned long long int id) {
+    game_container_by_categories.emplace(typeid(T), id);
+}
+
 void Object_Manager::delete_object(unsigned long long id) {
     game_container.erase(id);
 }
 
 void Object_Manager::increment_object_count() { object_count++; }
+
+template<typename T>
+void Object_Manager::update() {
+    for ()
+}

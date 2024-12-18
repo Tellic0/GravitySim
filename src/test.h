@@ -8,12 +8,13 @@
 #include "object.h"
 #include "objectmanager.h"
 
-class Test : public Object, public Moveable {
+class Test final : public Object, public Moveable {
 public:
     Object_Manager *object_manager_class;
 
     Test();
-    ~Test();
+
+    void init_variables();
 
     void draw_object(sf::RenderWindow *window) override;
 

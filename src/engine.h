@@ -52,7 +52,7 @@ public:
     // Temporary test methods and variables
     void test_game_container();
 
-    Test test_rect_1;
+    Test *test_rect_1 = new Test;
 };
 
 #endif//GRAVITYSIM_SRC_ENGINE_H

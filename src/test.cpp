@@ -5,16 +5,15 @@
 #include "test.h"
 
 Test::Test() {
+}
+
+void Test::init_variables() {
     object_manager_class = Object_Manager::get_instance();
     rect.setSize(sf::Vector2f(200, 200));
     rect.setPosition(sf::Vector2f(0, 0));
     rect.setFillColor(sf::Color::Blue);
     movement_vector = sf::Vector2f(1, 0);
     is_test = true;
-}
-
-Test::~Test() {
-    object_manager_class->delete_object(id);
 }
 
 void Test::draw_object(sf::RenderWindow *window) {

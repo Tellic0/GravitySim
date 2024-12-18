@@ -16,7 +16,6 @@ void Engine::init_classes() {
 
 Engine::Engine() {
     init_classes();
-    test_game_container();
 }
 
 Engine *Engine::get_instance() {
@@ -29,27 +28,26 @@ Engine *Engine::get_instance() {
     return instance_ptr;
 }
 
-// TEMPORARY
-void Engine::test_game_container() {
-}
-
 void Engine::update() {
     const std::chrono::microseconds frame_duration(1000000 / FRAMERATE);
     while (window->isOpen()) {
         auto frame_start = std::chrono::steady_clock::now();
 
         // Game updates TEMP
+        auto *sigma = object_manager_class->get_game_container();
         std::vector<unsigned long long int> to_delete;
-        test_game_container();
-        for (const auto &[id, obj] : *object_manager_class->get_game_container()) {
+        for (const auto &[id, obj] : *sigma) {
             if (obj) {
                 obj->update_object();
-                to_delete.push_back(obj->id);
             }
         }
-        for (auto e : to_delete) {
-            delete object_manager_class->get_objects_by_id(e);
+
+        for (const auto &id : to_delete) {
+            if ((*sigma)[id] != nullptr) {
+                delete (*sigma)[id];
+            }
         }
+
         // Checking if the frame took longer than expected to update
         auto frame_end = std::chrono::steady_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(frame_end - frame_start);
@@ -68,6 +66,7 @@ void Engine::render() {
     window->clear(sf::Color::Black);
 
     std::unordered_map<unsigned long long int, Object *> *game_container = object_manager_class->get_game_container();
+
     //const auto &[id, obj] : *game_container
     for (std::unordered_map<unsigned long long int, Object *>::iterator obj = game_container->begin();
          obj != game_container->end(); ++obj) {
